@@ -4,7 +4,9 @@ namespace Anik\Paperfly\Laravel;
 
 use Anik\Paperfly\Client;
 use Anik\Paperfly\Response;
+use Anik\Paperfly\Transfers\CancelOrder;
 use Anik\Paperfly\Transfers\CreateOrder;
+use Anik\Paperfly\Transfers\TrackOrder;
 
 class MerchantAccount
 {
@@ -30,5 +32,10 @@ class MerchantAccount
             'Create order accepts either an array or a "%s" object',
             CreateOrder::class
         ));
+    }
+
+    public function trackOrder(string $orderId): Response
+    {
+        return $this->client->gracefulTransfer(new TrackOrder($orderId));
     }
 }
