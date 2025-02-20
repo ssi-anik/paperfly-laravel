@@ -38,4 +38,9 @@ class MerchantAccount
     {
         return $this->client->gracefulTransfer(new TrackOrder($orderId));
     }
+
+    public function cancelOrder(string $orderId): Response
+    {
+        return $this->client->gracefulTransfer(new CancelOrder($orderId));
+    }
 }
